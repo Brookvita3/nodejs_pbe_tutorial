@@ -1,0 +1,2 @@
+09/10/2024	16:50:05	50a0c425-b202-4859-b976-be49f6a059d7	Error	Not allowed by CORS	GET	/
+09/10/2024	16:53:03	bcb2c9f1-f0ad-4e4c-a411-e46723af639c	Error	Not allowed by CORS	GET	/dasjnd
