@@ -4,42 +4,43 @@ const PORT = process.env.PORT || 3000;
 const { logger } = require("./middleware/LogEvents");
 const errorHandler = require("./middleware/ErrorHandle");
 const cors = require("cors");
+const corsOptions = require("./config/corsOption");
 
 const app = express();
 
 // custom middleware
 app.use(logger);
 
-// Cross Origin Resource Sharing
-const whitelist = [
-  "http://localhost:3000",
-  "http://127.0.0.1:5500",
-  "https://www.google.com",
-  "https://localhost:3000",
-];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Request origin:", origin);
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// enable cors
+app.use(cors(corsOptions));  
 
+// midleware for url encoded
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/aduvip(.jpg)?", (req, res) => {
-  res.sendFile(path.join(__dirname, "resources", "images", "aduvip.jpg"));
+// middleware for json
+app.use(express.json());
+
+// serves static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// router
+app.use("/", require("./router/root"));
+app.use("/subdir", require("./router/subdir"));
+app.use("/employees", require("./router/api/employees"));
+
+
+// if not match return not found
+app.all("*", (req, res) => {
+  if (req.accepts("html")) {
+    res.sendFile(path.join(__dirname, "resources", "views", "404.html"));
+  } else if (req.accepts("json")) {
+    res.json({ error: "Not found" });
+  } else {
+    res.status(404).send("404 Not found");
+  }
 });
 
-app.all("/*", (req, res) => {
-  res.status(404).send("404 Not found");
-});
-
+// error handler
 app.use(errorHandler);
 
 app.listen(PORT, () => {
