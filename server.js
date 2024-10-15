@@ -27,6 +27,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", require("./router/root"));
 app.use("/subdir", require("./router/subdir"));
 app.use("/employees", require("./router/api/employees"));
+app.use("/register", require("./router/api/register"));
+app.use("/auth", require("./router/api/auth"));
 
 
 // if not match return not found

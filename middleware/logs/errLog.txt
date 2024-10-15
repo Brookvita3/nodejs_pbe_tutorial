@@ -1,3 +1,5 @@
 09/10/2024	16:50:05	50a0c425-b202-4859-b976-be49f6a059d7	Error	Not allowed by CORS	GET	/
 09/10/2024	16:53:03	bcb2c9f1-f0ad-4e4c-a411-e46723af639c	Error	Not allowed by CORS	GET	/dasjnd
 10/10/2024	16:59:47	112fcfd3-127f-4053-bb1c-76d681cb8e29	Error	ENOENT: no such file or directory, stat 'D:\nodejs_pbe\views\subdir\index.html'	GET	/subdir
+15/10/2024	22:39:17	8320a1fe-91e1-47d9-835a-857c58d165b4	TypeError	Cannot read properties of undefined (reading 'authorization')	GET	/employees
+15/10/2024	22:40:30	3886458a-db4b-42f1-9bc9-6282ddf01cb2	TypeError	Cannot read properties of undefined (reading 'authorization')	GET	/employees

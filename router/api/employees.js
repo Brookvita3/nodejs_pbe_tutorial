@@ -3,11 +3,10 @@ const router = express.Router();
 const path = require("path");
 const { post } = require("../root");
 const employeesController = require("../../controllers/employeeController");
-const data = {};
-data.employees = require("../../model/employees.json");
+const verifyJWT = require("../../middleware/verifyJWT");
 
 router.route("/")
-    .get(employeesController.getAllEmployees)
+    .get(verifyJWT,employeesController.getAllEmployees)
     .post(employeesController.createNewEmployee)
     .put(employeesController.updateEmployee)
     .delete(employeesController.deleteEmployee)
